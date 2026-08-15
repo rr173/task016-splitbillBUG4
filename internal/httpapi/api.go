@@ -176,7 +176,7 @@ func (a *API) settlement(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, statusFor(err), map[string]any{"error": err.Error(), "status": statusFor(err)})
 		return
 	}
-	var out []transferJSON
+	out := make([]transferJSON, 0, len(transfers))
 	for _, tr := range transfers {
 		out = append(out, transferJSON{From: tr.From, To: tr.To, Amount: tr.AmountCents})
 	}
